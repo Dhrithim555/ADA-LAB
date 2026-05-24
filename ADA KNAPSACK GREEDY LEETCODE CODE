@@ -1,0 +1,15 @@
+char* removeDuplicateLetters(char* s) {
+    int cnt[26]={0}, used[26]={0}, top=-1;
+    for(int i=0;s[i];i++) cnt[s[i]-'a']++;
+    for(int i=0;s[i];i++){
+        char c=s[i];
+        cnt[c-'a']--;
+        if(used[c-'a']) continue;
+        while(top>=0 && s[top]>c && cnt[s[top]-'a']>0)
+            used[s[top--]-'a']=0;
+        s[++top]=c;
+        used[c-'a']=1;
+    }
+    s[top+1]='\0';
+    return s;
+}
