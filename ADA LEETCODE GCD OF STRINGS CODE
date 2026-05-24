@@ -1,0 +1,40 @@
+include <string.h>
+
+int gcd (int a , int b) {
+    while (b) {
+        int t = b ;
+        b = a % b ;
+        a = t ;
+    }
+    return a ;
+}
+
+char * gcdOfStrings (char * str1 , char * str2) {
+
+    int len1 = strlen (str1) ;
+    int len2 = strlen (str2) ;
+
+    if (strcmp (str1 , str2) != 0) {
+
+        char temp1 [402] ;
+        char temp2 [402] ;
+
+        strcpy ( temp1 , str1) ;
+        strcat ( temp1 , str2) ;
+
+        strcpy ( temp2 , str2) ;
+        strcat ( temp2 , str1) ;
+
+        if (strcmp (temp1 , temp2) != 0)
+            return "" ;
+    }
+
+    int g = gcd (len1 , len2) ;
+
+    static char result [201] ;
+
+    strncpy ( result , str1 , g) ;
+    result [g] = '\0' ;
+
+    return result ;
+}
