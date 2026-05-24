@@ -1,0 +1,22 @@
+    int d[101][101], i, j, k, r = 0, mc = 1e9;
+    for (i = 0; i < n; i++)
+        for (j = 0; j < n; j++)
+            d[i][j] = (i == j) ? 0 : 1e9;
+    for (i = 0; i < m; i++)
+        d[e[i][0]][e[i][1]] = d[e[i][1]][e[i][0]] = e[i][2];
+    for (k = 0; k < n; k++)
+        for (i = 0; i < n; i++)
+            for (j = 0; j < n; j++)
+                if (d[i][j] > d[i][k] + d[k][j])
+                    d[i][j] = d[i][k] + d[k][j];
+    for (i = 0; i < n; i++) {
+        int cnt = 0;
+        for (j = 0; j < n; j++)
+            cnt += (d[i][j] <= t);
+        if (cnt <= mc) {
+            mc = cnt;
+            r = i;
+        }
+    }
+    return r;
+}
