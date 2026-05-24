@@ -1,0 +1,21 @@
+#include <stdlib.h>
+void ms (int * a , int l , int r) {
+    if ( l >= r) return ;
+    int m = (l + r)/2 , i = l , j = m + 1 , k = 0 ;
+    int t[r - l + 1] ;
+    ms (a , l , m) ;
+    ms (a , m + 1 , r) ;
+    while ( i <= m && j <= r )
+        t [k++] = (a [i] < a [j]) ? a [i++] : a [j++] ;
+    while (i <= m)
+        t [k++] = a [i++] ;
+    while (j <= r)
+        t [k++] = a [j++] ;
+    for (i = l , k = 0 ; i <= r ; i++ , k++)
+        a [i] = t [k] ;
+}
+int* sortArray (int* nums , int numsize , int* returnSize) {
+    *returnSize = numsize ;
+    ms (nums , 0 , numsize - 1) ;
+    return nums ;
+}
